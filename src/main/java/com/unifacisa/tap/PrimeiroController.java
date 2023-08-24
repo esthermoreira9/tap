@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import model.Pessoa;
 
 @RestController
-@RequestMapping("api/produtos")
+@RequestMapping("/api")
 public class PrimeiroController {
 
 	private List<Pessoa> pessoas = new ArrayList<>();

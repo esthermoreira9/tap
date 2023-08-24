@@ -16,7 +16,7 @@ public class PrimeiroController {
 	private List<Pessoa> pessoas = new ArrayList<>();
 	
 	@GetMapping("/pessoa")
-	public List<Pessoa> findById() {
+	public List<Pessoa> listAll() {
 		Pessoa p = new Pessoa("esther", 18, "Rua Paris");
 		Pessoa b = new Pessoa("ruan", 29, "Rua Japão");
 		Pessoa c = new Pessoa("anne", 20, "Rua Europa");

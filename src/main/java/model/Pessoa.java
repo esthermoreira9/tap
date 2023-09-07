@@ -4,7 +4,7 @@ public class Pessoa {
 	
 	private String nome;
 	private int idade;
-	private String endeco;
+	private String endereco;
 	
 	public String getNome() {
 		return nome;
@@ -18,17 +18,21 @@ public class Pessoa {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	public String getEndeco() {
-		return endeco;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setEndeco(String endeco) {
-		this.endeco = endeco;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
-	public Pessoa(String nome, int idade, String endeco) {
+	public Pessoa(String nome, int idade, String endereco) {
 		super();
 		this.nome = nome;
 		this.idade = idade;
-		this.endeco = endeco;
+		this.endereco = endereco;
+	}
+	
+	public Pessoa() {
+		super();
 	}
 
 }

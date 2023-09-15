@@ -22,7 +22,7 @@ import com.unifacisa.tap.service.PessoaService;
 
 @RestController
 @RequestMapping("/api")
-public class PrimeiroController {
+public class PessoaController {
 	
 	@Autowired
 	PessoaService pessoaService;

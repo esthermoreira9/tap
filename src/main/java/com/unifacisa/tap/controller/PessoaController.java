@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.unifacisa.tap.entity.Pessoa;
+import com.unifacisa.tap.entity.Project;
 import com.unifacisa.tap.service.PessoaService;
 
 @RestController
@@ -35,8 +38,13 @@ public class PessoaController {
 	
 	@GetMapping("/pessoa/{id}")
 	public ResponseEntity<Pessoa> getPessoa(@PathVariable int id) throws IOException {
-		Pessoa pessoa = pessoaService.listarUsuarioPorId(id);
-		return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
+		try {
+			Pessoa pessoa = pessoaService.listarUsuarioPorId(id);
+			return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Pessoa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping("/pessoa")
@@ -82,5 +90,41 @@ public class PessoaController {
 			e.printStackTrace();
 			return new ResponseEntity<Pessoa>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping("/teste6/{valor}")
+	public ResponseEntity<String> getValue(@PathVariable int valor){
+		
+		String url = "http://jsonplaceholder.typicode.com/posts/"+valor;
+		
+		RestTemplate client = new RestTemplate();
+		
+		String valorRetornado = client.getForObject(url, String.class);
+		
+		return new ResponseEntity<String>(valorRetornado, HttpStatus.OK);
+	}
+	
+	@GetMapping("/teste7/{valor}")
+	public ResponseEntity<Project> getValor(@PathVariable int valor){
+		
+		String url = "http://jsonplaceholder.typicode.com/posts/"+valor;
+		
+		RestTemplate client = new RestTemplate();
+		
+		Project valorRetornado = client.getForObject(url, Project.class);
+		
+		return new ResponseEntity<Project>(valorRetornado, HttpStatus.OK);
+	}
+	
+	@GetMapping("/teste8")
+	public ResponseEntity<String> getAcoes(){
+		
+		String url = "http://opcoes.net.br/opcoes2/bovespa";
+		
+		RestTemplate client = new RestTemplate();
+		
+		String valorRetornado = client.getForObject(url, String.class);
+		
+		return new ResponseEntity<String>(valorRetornado, HttpStatus.OK);
 	}
 }
